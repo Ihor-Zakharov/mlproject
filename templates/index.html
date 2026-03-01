@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Project | Ihor Zakharov</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            background-image: radial-gradient(circle at top right, #ff5252 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, #232526 0%, transparent 40%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .badge {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            background: -webkit-linear-gradient(#ffffff, #a0a5b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: #8b949e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .author {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #6e7681;
+        }
+
+        .author span {
+            color: #ffffff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="badge">Internship Demo For Monobank</div>
+        <h1>Machine Learning Pipeline</h1>
+        <p>An end-to-end regression model featuring a complete data processing cycle, metric prediction, and cloud deployment.</p>
+        
+        <a href="/predictdata" class="btn">Test the Model</a>
+
+        <div class="author">
+            Developed by <span>Ihor Zakharov</span> for Monobank
+        </div>
+    </div>
+
+</body>
+</html>

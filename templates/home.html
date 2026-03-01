@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict | Student Performance</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            background-image:
+                radial-gradient(circle at 20% 10%, rgba(255, 82, 82, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(35, 37, 38, 0.6) 0%, transparent 50%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            transition: color 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+        }
+
+        .badge {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .card h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff 30%, #a0a5b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #c9d1d9;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group select,
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+
+        .form-group select:focus,
+        .form-group input[type="number"]:focus {
+            border-color: rgba(255, 82, 82, 0.5);
+            box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.1);
+        }
+
+        .form-group input[type="number"]::placeholder {
+            color: #484f58;
+        }
+
+        .form-group input[type="number"]::-webkit-inner-spin-button,
+        .form-group input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px 24px;
+            margin-top: 8px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Result block */
+        .result-box {
+            margin-top: 28px;
+            padding: 20px 24px;
+            background: rgba(255, 82, 82, 0.06);
+            border: 1px solid rgba(255, 82, 82, 0.15);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .result-box .result-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ff5252;
+            margin-bottom: 6px;
+        }
+
+        .result-box .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #ff5252);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: #484f58;
+        }
+
+        .footer span {
+            color: #8b949e;
+            font-weight: 600;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 32px 24px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .card h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back
+        </a>
+
+        <div class="badge">Prediction</div>
+        <h1>Student Exam Performance</h1>
+        <p class="subtitle">Fill in the details below to predict the math score.</p>
+
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select name="gender" required>
+                        <option selected disabled value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Race / Ethnicity</label>
+                    <select name="ethnicity" required>
+                        <option selected disabled value="">Select Ethnicity</option>
+                        <option value="group A">Group A</option>
+                        <option value="group B">Group B</option>
+                        <option value="group C">Group C</option>
+                        <option value="group D">Group D</option>
+                        <option value="group E">Group E</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Parental Level of Education</label>
+                <select name="parental_level_of_education" required>
+                    <option selected disabled value="">Select Parent Education</option>
+                    <option value="associate's degree">Associate's Degree</option>
+                    <option value="bachelor's degree">Bachelor's Degree</option>
+                    <option value="high school">High School</option>
+                    <option value="master's degree">Master's Degree</option>
+                    <option value="some college">Some College</option>
+                    <option value="some high school">Some High School</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Lunch Type</label>
+                    <select name="lunch" required>
+                        <option selected disabled value="">Select Lunch</option>
+                        <option value="free/reduced">Free / Reduced</option>
+                        <option value="standard">Standard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Test Preparation Course</label>
+                    <select name="test_preparation_course" required>
+                        <option selected disabled value="">Select Course</option>
+                        <option value="none">None</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Writing Score out of 100</label>
+                    <input type="number" name="reading_score"
+                        placeholder="Enter score" min='0' max='100' />
+                </div>
+                <div class="form-group">
+                    <label>Reading Score out of 100</label>
+                    <input type="number" name="writing_score"
+                        placeholder="Enter score" min='0' max='100' />
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Predict Math Score</button>
+
+        </form>
+
+        {% if results %}
+        <div class="result-box">
+            <div class="result-label">Predicted Math Score</div>
+            <div class="result-value">{{ results }}</div>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            Developed by <span>Ihor Zakharov</span> for Monobank
+        </div>
+
+    </div>
+</body>
+</html>
