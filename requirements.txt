@@ -1,9 +1,9 @@
+Flask
+dill
+gunicorn
 numpy
 pandas
 scikit-learn
 seaborn
 matplotlib
 xgboost
-Flask
-dill
-gunicorn
